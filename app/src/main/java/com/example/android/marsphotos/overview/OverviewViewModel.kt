@@ -35,8 +35,8 @@ class OverviewViewModel : ViewModel() {
     // The external immutable LiveData for the request status
     val status: LiveData<String> = _status
 
-    private val _photos = MutableLiveData<MarsPhoto>()
-    val photos: LiveData<MarsPhoto> = _photos
+    private val _photos = MutableLiveData<List<MarsPhoto>>()
+    val photos: LiveData<List<MarsPhoto>> = _photos
 
     /**
      * Call getMarsPhotos() on init so we can display status immediately.
@@ -53,8 +53,8 @@ class OverviewViewModel : ViewModel() {
         //_status.value = "Set the Mars API status response here!"
         viewModelScope.launch {
             try {
-                _photos.value = MarsApi.retrofitService.getPhotos()[0]
-                _status.value = "   First Mars image URL : ${_photos.value!!.imgSrcUrl}"
+                _photos.value = MarsApi.retrofitService.getPhotos()
+                _status.value = "Success: ${_photos.value!!.size} Mars photos retrieved"
             } catch (e: Exception) {
                 Log.i("FATAL 1", e.message.toString())
                 _status.value = "No Intent Access! \n ${e.message}"
