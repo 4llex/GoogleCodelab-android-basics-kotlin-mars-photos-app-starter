@@ -7,6 +7,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 
 private const val BASE_URL = "https://android-kotlin-fun-mars-server.appspot.com"
+private const val BASE_URL2 = "https://api.slingacademy.com/v1/sample-data"
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
